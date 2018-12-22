@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object class="tk.Frame" id="MainFrame">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">True</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object class="ttk.Button" id="FileButton">
+        <property name="command">openFile</property>
+        <property name="compound">left</property>
+        <property name="cursor">pointinghand</property>
+        <property name="text" translatable="yes">
+Predict Image
+</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Label" id="Prediction">
+        <property name="anchor">w</property>
+        <property name="font">TkIconFont</property>
+        <property name="height">3</property>
+        <property name="height">3</property>
+        <property name="justify">left</property>
+        <property name="relief">flat</property>
+        <property name="state">normal</property>
+        <property name="text" translatable="yes">Prediction: </property>
+        <property name="width">25</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Message" id="Header">
+        <property name="anchor">center</property>
+        <property name="borderwidth">20</property>
+        <property name="font">TkMenuFont</property>
+        <property name="text" translatable="yes">Predict Image as a Banana or Not Banana
+</property>
+        <property name="width">300</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Label" id="Image">
+        <property name="anchor">center</property>
+        <property name="font">TkIconFont</property>
+        <property name="height">1</property>
+        <property name="height">1</property>
+        <property name="justify">center</property>
+        <property name="padx">0</property>
+        <property name="pady">3</property>
+        <property name="state">normal</property>
+        <property name="text" translatable="yes">
+</property>
+        <property name="width">25</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>
