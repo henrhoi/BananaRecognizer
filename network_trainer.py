@@ -6,19 +6,22 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+DEFAULT_NETWORK = 'BananaNetwork/banana_net.h5'
+
 # Defining dataset paths
-synset_fruit365_training = 'synset_fruit365/training'
-synset_fruit365_validation = 'synset_fruit365/validation'
+SYNSET_FRUIT365_TRAINING = 'datasets/synset_fruit365/training'
+SYNSET_FRUIT365_VALIDATION = 'datasets/synset_fruit365/validation'
 
-google_ukbench_training = 'google_images/training'
-google_ukbench_validation = 'google_images/validation'
+GOOGLE_UKBENCH_TRAINING = 'datasets/google_images/training'
+GOOGLE_UKBENCH_VALIDATION = 'datasets/google_images/validation'
 
-synset_fruit365_google_ukbench_training = 'google_synset_fruit365/training'
-synset_fruit365_google_ukbench_validation = 'google_synset_fruit365/validation'
+SYNSET_FRUIT365_GOOGLE_UKBENCH_TRAINING = 'datasets/google_synset_fruit365/training'
+SYNSET_FRUIT365_GOOGLE_UKBENCH_VALIDATION = 'datasets/google_synset_fruit365/validation'
+
 
 # Defining datasets
-dataset_training_path = synset_fruit365_google_ukbench_training
-dataset_validation_path = synset_fruit365_google_ukbench_validation
+dataset_training_path = SYNSET_FRUIT365_GOOGLE_UKBENCH_TRAINING
+dataset_validation_path = SYNSET_FRUIT365_GOOGLE_UKBENCH_VALIDATION
 
 # Because of uneven datasets
 epochs_steps = min(len(os.listdir(dataset_training_path + "/banana")),
@@ -27,7 +30,7 @@ validation_steps = min(len(os.listdir(dataset_validation_path + "/banana")),
 					   len(os.listdir(dataset_validation_path + "/other")))
 
 # Retrieving model
-model = load_model('BananaNetwork/banana_net_19_12_18.h5')
+model = load_model(DEFAULT_NETWORK)
 
 # Data augmentation
 train_datagen = ImageDataGenerator(rescale=1. / 255, shear_range=0.1, zoom_range=0.2, horizontal_flip=True,
@@ -35,16 +38,16 @@ train_datagen = ImageDataGenerator(rescale=1. / 255, shear_range=0.1, zoom_range
 								   height_shift_range=0.1, fill_mode="nearest")
 test_datagen = ImageDataGenerator(rescale=1. / 255)
 
-training_set = train_datagen.flow_from_directory(synset_fruit365_training,
+training_set = train_datagen.flow_from_directory(SYNSET_FRUIT365_TRAINING,
 												 target_size=(64, 64),
 												 batch_size=32,
 												 class_mode='binary',
 												 shuffle=True)
-test_set = test_datagen.flow_from_directory(synset_fruit365_validation,
+
+test_set = test_datagen.flow_from_directory(SYNSET_FRUIT365_VALIDATION,
 											target_size=(64, 64),
 											batch_size=32,
-											class_mode='binary',
-											shuffle=True)
+											class_mode='binary')
 
 # Defining epochs, trains model, and saves
 EPOCHS = 5
@@ -57,7 +60,7 @@ train_history = model.fit_generator(training_set,
 									validation_data=test_set,
 									validation_steps=validation_steps)
 
-model.save('BananaNetwork/banana_net_19_12_18.h5')
+model.save(DEFAULT_NETWORK)
 
 # Plotting training epochs
 plt.style.use("ggplot")

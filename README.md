@@ -11,12 +11,14 @@ Layers: `2DConv > MaxPool > Flatten > Relu > Sigmoid`
 
 ##### File structure
 
-TBD
+TBA
 
 #### Datasets
 
-TBD
+* Fruit365
+* Synset - ImageNet
+* Google Images
 
 #### Performance
 
-TBD
+![EpochFig](epoch_fig.png)
