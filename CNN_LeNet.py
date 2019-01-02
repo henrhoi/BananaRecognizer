@@ -13,22 +13,22 @@ from keras.optimizers import Adam
 def build_network(save_path, input_shape, optimizer, classes, save=True):
 	model = Sequential()
 
-	# first set of CONV => RELU => POOL layers
+	# First set of CONV > RELU > POOL layers
 	model.add(Conv2D(20, (5, 5), padding="same", input_shape=input_shape))
 	model.add(Activation("relu"))
 	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
-	# second set of CONV => RELU => POOL layers
+	# Second set of CONV > RELU > POOL layers
 	model.add(Conv2D(50, (5, 5), padding="same"))
 	model.add(Activation("relu"))
 	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
-	# first (and only) set of FC => RELU layers
+	# First (and only) set of FC => RELU layers
 	model.add(Flatten())
 	model.add(Dense(500))
 	model.add(Activation("relu"))
 
-	# softmax classifier
+	# Softmax classifier
 	model.add(Dense(classes))
 	model.add(Activation("softmax"))
 

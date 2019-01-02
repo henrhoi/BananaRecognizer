@@ -1,3 +1,7 @@
+# set the matplotlib backend so figures can be saved in the background
+import matplotlib
+matplotlib.use("Agg")
+
 from keras.callbacks import EarlyStopping
 from keras.models import load_model
 from keras_preprocessing.image import ImageDataGenerator
@@ -6,7 +10,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-DEFAULT_NETWORK = 'BananaNetwork/banana_net.h5'
+DEFAULT_NETWORK = 'BananaNetwork/le_banana_net.h5'
+TARGET_SIZE = (28, 28)
 
 # Defining dataset paths
 SYNSET_FRUIT365_TRAINING = 'datasets/synset_fruit365/training'
@@ -17,7 +22,6 @@ GOOGLE_UKBENCH_VALIDATION = 'datasets/google_images/validation'
 
 SYNSET_FRUIT365_GOOGLE_UKBENCH_TRAINING = 'datasets/google_synset_fruit365/training'
 SYNSET_FRUIT365_GOOGLE_UKBENCH_VALIDATION = 'datasets/google_synset_fruit365/validation'
-
 
 # Defining datasets
 dataset_training_path = SYNSET_FRUIT365_GOOGLE_UKBENCH_TRAINING
@@ -30,39 +34,42 @@ validation_steps = min(len(os.listdir(dataset_validation_path + "/banana")),
 					   len(os.listdir(dataset_validation_path + "/other")))
 
 # Retrieving model
+print("[INFO] loading network...")
 model = load_model(DEFAULT_NETWORK)
 
 # Data augmentation
-train_datagen = ImageDataGenerator(rescale=1. / 255, shear_range=0.1, zoom_range=0.2, horizontal_flip=True,
-								   rotation_range=30, width_shift_range=0.1,
+train_datagen = ImageDataGenerator(rescale=1. / 255, rotation_range=30, horizontal_flip=True,
+								   zoom_range=0.2, shear_range=0.2, width_shift_range=0.1,
 								   height_shift_range=0.1, fill_mode="nearest")
 test_datagen = ImageDataGenerator(rescale=1. / 255)
 
 training_set = train_datagen.flow_from_directory(SYNSET_FRUIT365_TRAINING,
-												 target_size=(64, 64),
+												 target_size=TARGET_SIZE,
 												 batch_size=32,
-												 class_mode='binary',
-												 shuffle=True)
+												 shuffle=True,)
 
 test_set = test_datagen.flow_from_directory(SYNSET_FRUIT365_VALIDATION,
-											target_size=(64, 64),
-											batch_size=32,
-											class_mode='binary')
+											target_size=TARGET_SIZE,
+											batch_size=32,)
 
 # Defining epochs, trains model, and saves
-EPOCHS = 5
+EPOCHS = 10
 
 earlystop = EarlyStopping(monitor='acc', baseline=1.0, patience=0)
 
+print("[INFO] training network...")
 train_history = model.fit_generator(training_set,
 									steps_per_epoch=epochs_steps,
 									epochs=EPOCHS,
 									validation_data=test_set,
-									validation_steps=validation_steps)
+									validation_steps=validation_steps,
+									verbose=1)
 
+print("[INFO] serializing network...")
 model.save(DEFAULT_NETWORK)
 
 # Plotting training epochs
+print("[INFO] plotting epoch figure...")
 plt.style.use("ggplot")
 plt.figure()
 plt.plot(np.arange(0, EPOCHS), train_history.history["loss"], label="train_loss")

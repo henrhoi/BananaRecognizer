@@ -16,10 +16,10 @@ def build_network(save_path, save=True):
 	classifier.add(Flatten())
 	classifier.add(Dense(units=128, activation='relu'))
 
-	# Single output node, becuse it is only a binary classification problem (banana or not banana)
+	# Single output node, because it is only a binary classification problem (banana or not banana)
 	classifier.add(Dense(units=1, activation='sigmoid'))
 
-	# Using binary cross entropy as loss-function becuase of binary classification
+	# Using binary cross entropy as loss-function because of binary classification
 	classifier.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 	# Saving model to file
