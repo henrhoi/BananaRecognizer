@@ -1,17 +1,24 @@
-# set the matplotlib backend so figures can be saved in the background
-import matplotlib
-matplotlib.use("Agg")
-
-from keras.callbacks import EarlyStopping
 from keras.models import load_model
 from keras_preprocessing.image import ImageDataGenerator
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+from tensorflow import keras
+import tensorflow as tf
+
+# Set the matplotlib backend so figures can be saved in the background
+import matplotlib
+matplotlib.use("Agg")
+
+config = tf.ConfigProto()
+
+config.gpu_options.allow_growth = True
+config.gpu_options.per_process_gpu_memory_fraction = 0.7
+keras.backend.set_session(tf.Session(config=config))
 
 
-DEFAULT_NETWORK = 'BananaNetwork/le_banana_net.h5'
-TARGET_SIZE = (28, 28)
+DEFAULT_NETWORK = 'BananaNetwork/le_banana_net_26_02_2019.h5'
+TARGET_SIZE = (64, 64)
 
 # Defining dataset paths
 SYNSET_FRUIT365_TRAINING = 'datasets/synset_fruit365/training'
@@ -53,9 +60,9 @@ test_set = test_datagen.flow_from_directory(SYNSET_FRUIT365_VALIDATION,
 											batch_size=32,)
 
 # Defining epochs, trains model, and saves
-EPOCHS = 10
+EPOCHS = 25
 
-earlystop = EarlyStopping(monitor='acc', baseline=1.0, patience=0)
+# earlystop = EarlyStopping(monitor='acc', baseline=1.0, patience=0)
 
 print("[INFO] training network...")
 train_history = model.fit_generator(training_set,
