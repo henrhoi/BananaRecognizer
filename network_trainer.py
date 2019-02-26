@@ -18,7 +18,7 @@ config.gpu_options.per_process_gpu_memory_fraction = 1
 config.log_device_placement = True
 keras.backend.set_session(tf.Session(config=config))
 
-DEFAULT_NETWORK = 'BananaNetwork/banana_net_26_02_2019.h5'
+DEFAULT_NETWORK = 'BananaNetwork/le_banana_net_26_02_2019.h5'
 TARGET_SIZE = (64, 64)
 
 # Defining dataset paths
