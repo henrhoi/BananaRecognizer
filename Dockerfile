@@ -19,6 +19,6 @@ RUN pip3 install --upgrade pip
 # Add your dependencies in the requirements.txt
 # To update the requirements with the dependencies in your virtual enviroment:
 # $ pip freeze > requirements.txt
-RUN pip3 install -r requirements.txt
+#RUN pip3 install -r requirements.txt
 
 COPY . /BananaRecognizer

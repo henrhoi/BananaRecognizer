@@ -4,7 +4,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
-import keras
+from tensorflow import keras
 
 # Set the matplotlib backend so figures can be saved in the background
 import matplotlib
@@ -14,7 +14,7 @@ matplotlib.use("Agg")
 config = tf.ConfigProto()
 
 config.gpu_options.allow_growth = True
-config.gpu_options.per_process_gpu_memory_fraction = 0.7
+config.gpu_options.per_process_gpu_memory_fraction = 1
 config.log_device_placement = True
 keras.backend.set_session(tf.Session(config=config))
 
@@ -46,10 +46,10 @@ print("[INFO] loading network...")
 model = load_model(DEFAULT_NETWORK)
 
 # Data augmentation
-train_datagen = ImageDataGenerator(rescale=1. / 255, rotation_range=30, horizontal_flip=True,
-                                   zoom_range=0.2, shear_range=0.2, width_shift_range=0.1,
-                                   height_shift_range=0.1, fill_mode="nearest")
-test_datagen = ImageDataGenerator(rescale=1. / 255)
+train_datagen = ImageDataGenerator(rescale=1. / 255, rotation_range=60, horizontal_flip=True,
+                                   zoom_range=0.3, shear_range=0.2, width_shift_range=0.2,
+                                   height_shift_range=0.2, fill_mode="nearest")
+test_datagen = ImageDataGenerator(rescale=1. / 255, rotation_range=20, horizontal_flip=True, zoom_range=0.1, fill_mode="nearest")
 
 training_set = train_datagen.flow_from_directory(SYNSET_FRUIT365_TRAINING,
                                                  target_size=TARGET_SIZE,
@@ -61,7 +61,7 @@ test_set = test_datagen.flow_from_directory(SYNSET_FRUIT365_VALIDATION,
                                             batch_size=32, )
 
 # Defining epochs, trains model, and saves
-EPOCHS = 25
+EPOCHS = 10
 
 # earlystop = EarlyStopping(monitor='acc', baseline=1.0, patience=0)
 
