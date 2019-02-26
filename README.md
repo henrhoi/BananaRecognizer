@@ -1,12 +1,16 @@
 # Banana Recognizer 🍌
 
-**Convolutional Neural Network:** `BananaNetwork/banana_net_17_12_18.h5`
+**Processing power used:**
+* *GPU:* 2x NVIDIA Tesla V100 32GB
+* *CPU:* 2x Intel Xeon Gold 6132 2.6G, 14C/28T, 10.4GT/s 2UPI, 19M Cache, Turbo, HT (140W) DDR4-2666
+* *RAM:* 24x 32GB = 768GB
+
+**Convolutional Neural Network:** `BananaNetwork/banana_net_17_12_18.h5
 * `INPUT > CONV > RELU > POOL > FC > RELU > FC`
-* Build script: `CNN.py`
-> `BananaNetwork/banana_net.h5 is currently overfitted`
+* Build script: `CNN.py
 
 
-**Convolutional Netural Network:** `BananaNetwork/le_banana_net.h5`
+**Convolutional Netural Network:** `BananaNetwork/le_banana_net_26_02_19.h5`
 
 * `INPUT > CONV > RELU > POOL > CONV > RELU > POOL > FC > RELU > FC`
 * Build script: `CNN_LeNet.py`
@@ -20,6 +24,7 @@
 ├── BananaNetwork
 │   ├── banana_net.h5
 │   ├── banana_net_17_12_18.h5
+│   ├── banana_net_26_02_19.h5
 │   └── le_banana_net.h5
 ├── CNN.py
 ├── CNN_LeNet.py
