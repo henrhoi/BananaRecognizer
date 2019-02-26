@@ -13,7 +13,7 @@ COPY "./requirements.txt" "/BananaRecognizer/requirements.txt"
 # Install git
 RUN apt-get install git -y
 
-# Install your python packages
+# Install your python packages:
 RUN pip3 install --upgrade pip
 
 # Add your dependencies in the requirements.txt
