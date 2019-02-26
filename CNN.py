@@ -4,7 +4,15 @@ from keras.layers import Conv2D
 from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dense
+import keras
+import tensorflow as tf
 
+
+config = tf.ConfigProto()
+
+config.gpu_options.allow_growth = True
+config.gpu_options.per_process_gpu_memory_fraction = 0.7
+keras.backend.set_session(tf.Session(config=config))
 
 # Constructing Sequential Convolutional Neural Network
 def build_network(save_path, save=True):
