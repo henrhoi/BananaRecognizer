@@ -35,4 +35,4 @@ def build_network(save_path, save=True):
 	return classifier
 
 
-build_network('BananaNetwork/banana_net.h5')
+build_network('BananaNetwork/banana_net_26_02_2019.h5')
