@@ -9,8 +9,8 @@ import imutils
 from imutils.video import WebcamVideoStream
 
 # Application setup
-MODEL_NAME = '../BananaNetwork/le_banana_net.h5'
-INPUT_SHAPE = (28, 28)
+MODEL_NAME = '../BananaNetwork/le_banana_net_26_02_2019.h5'
+INPUT_SHAPE = (64, 64)
 PROBABILISTIC = True
 
 # Initializing global variables
