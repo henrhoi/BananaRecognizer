@@ -3,8 +3,8 @@ import os
 from keras.models import load_model
 from keras_preprocessing import image
 
-DEFAULT_NETWORK = os.getcwd() + "/BananaNetwork/le_banana_net.h5"
-TARGET_SIZE = (28, 28)
+DEFAULT_NETWORK = os.getcwd() + "/BananaNetwork/le_banana_net_26_02_2019.h5"
+TARGET_SIZE = (64, 64)
 
 
 def build_label(result, banana_label='🍌', probabilistic=True):
@@ -56,7 +56,7 @@ def predict_images(folder_path, model_name):
 	print('{} 🍌\'s in the {} pictures'.format(bananas, len(test_images)))
 
 
-# predict_images("predict_tests", DEFAULT_NETWORK)
+predict_images("predict_tests", DEFAULT_NETWORK)
 
 
 def predict_image(image_path, model_name=DEFAULT_NETWORK):
