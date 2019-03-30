@@ -4,7 +4,7 @@ import tkinter as tk
 import cv2
 import pygubu
 from PIL import ImageTk, Image
-
+import os
 from banana_predicter import predict_image
 
 
@@ -34,8 +34,8 @@ class GUIPredicter:
 			return
 
 		if filename:
-			result = predict_image(filename, "../BananaNetwork/banana_net.h5")
-			prediction = 'Banana' if result == 0 else 'Not Banana'
+			result = predict_image(filename, model_name="../BananaNetwork/banana_net_17_12_18.h5", probabilistic=False)
+			prediction = 'Banana' if result[0][0] == 0 else 'Not Banana'
 
 			# Showing prediction
 			label = self.builder.get_object('Prediction')

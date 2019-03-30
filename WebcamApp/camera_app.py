@@ -9,9 +9,9 @@ import imutils
 from imutils.video import WebcamVideoStream
 
 # Application setup
-MODEL_NAME = '../BananaNetwork/le_banana_net_26_02_2019.h5'
+MODEL_NAME = "../BananaNetwork/banana_net_17_12_18.h5"
 INPUT_SHAPE = (64, 64)
-PROBABILISTIC = True
+PROBABILISTIC = False
 
 # Initializing global variables
 CON_BANANA_FRAMES = 0
